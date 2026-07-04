@@ -1,0 +1,20 @@
+from flask import Flask
+import mysql.connector
+
+app = Flask(__name__)
+
+@app.route('/')
+def test_connection():
+    try:
+        conexao = mysql.connector.connect(
+            host='banco************rds.amazonaws.com',
+            user='admin',
+            password='**********',
+            database='sys'
+        )
+        return '<h1>Sucesso! O servidor EC2 conectou ao RDS isolado! 🎉</h1>'
+    except Exception as e:
+        return f'<h1>Erro na conexao: {str(e)}</h1>'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
